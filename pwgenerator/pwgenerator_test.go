@@ -5,9 +5,8 @@ import (
 	"testing"
 )
 
-
 //standard version
-func benchmark_GenerateFullPW(b *testing.B) string{
+func benchmarkGenerateFullPW(b *testing.B) string {
 	pw := make([]rune, b.N)
 	for i := range pw {
 		pw[i] = chars[rand.Intn(len(chars))]
@@ -16,16 +15,16 @@ func benchmark_GenerateFullPW(b *testing.B) string{
 }
 
 //version with constants & remainder
-func benchmark_GenerateUpperLowerPW(b *testing.B) string {
+func benchmarkGenerateUpperLowerPW(b *testing.B) string {
 	pw := make([]byte, b.N)
 	for i := range pw {
-		pw[i] = benchmark[rand.Int63() % int64(len(benchmark))]
+		pw[i] = benchmark[rand.Int63()%int64(len(benchmark))]
 	}
 	return string(pw)
 }
 
 //version with constants and masking
-func benchmark_GenerateLowerChars(b *testing.B) string {
+func benchmarkGenerateLowerChars(b *testing.B) string {
 	pw := make([]byte, b.N)
 	// A rand.Int63() generates 63 random bits, enough for letterIdxMax letters!
 	for i, cache, remain := b.N-1, rand.Int63(), letterIdxMax; i >= 0; {
@@ -44,7 +43,7 @@ func benchmark_GenerateLowerChars(b *testing.B) string {
 }
 
 //version with improved src
-func benchmark_GenerateUpperChar(b *testing.B)string {
+func benchmarkGenerateUpperChar(b *testing.B) string {
 	pw := make([]byte, b.N)
 	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
 	for i, cache, remain := b.N-1, src.Int63(), letterIdxMax; i >= 0; {
@@ -62,11 +61,7 @@ func benchmark_GenerateUpperChar(b *testing.B)string {
 	return string(pw)
 }
 
-
-
-func BenchmarkVersion1(b *testing.B){benchmark_GenerateFullPW(b)}
-func BenchmarkVersion2(b *testing.B){benchmark_GenerateUpperLowerPW(b)}
-func BenchmarkVersion3(b *testing.B){benchmark_GenerateLowerChars(b)}
-func BenchmarkVersion4(b *testing.B){benchmark_GenerateUpperChar(b)}
-
-
+func BenchmarkVersion1(b *testing.B) { benchmarkGenerateFullPW(b) }
+func BenchmarkVersion2(b *testing.B) { benchmarkGenerateUpperLowerPW(b) }
+func BenchmarkVersion3(b *testing.B) { benchmarkGenerateLowerChars(b) }
+func BenchmarkVersion4(b *testing.B) { benchmarkGenerateUpperChar(b) }
