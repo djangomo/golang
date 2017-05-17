@@ -45,15 +45,19 @@ func startingPoint() {
 	switch input {
 	case "1": fmt.Println("Option 1 selected")
 		fmt.Println(generateFullPW(maxPwChars))
+		startingPoint()
 		break
 	case "2": fmt.Println("Option 2 selected")
 		fmt.Println(generateUpperLowerPW(maxPwChars))
+		startingPoint()
 		break
 	case "3": fmt.Println("Option 3 selected")
 		fmt.Println(generateLowerChars(maxPwChars))
+		startingPoint()
 		break
 	case "4": fmt.Println("Option 4 selected")
 		fmt.Println(generateUpperChar(maxPwChars))
+		startingPoint()
 		break
 	case "5": fmt.Println("Option 5 selected")
 
