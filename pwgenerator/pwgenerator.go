@@ -1,5 +1,7 @@
 package main
 
+//Setup github.com
+
 import (
 	"fmt"
 	"math/rand"
