@@ -1,6 +1,6 @@
 package main
 
-//Setup again
+//Setup
 
 import (
 	"fmt"
@@ -139,6 +139,6 @@ func generateUpperChar(n int) string {
 	return string(b)
 }
 
-func main() { 
+func main() {
 	js.Global.Call("alert", "Hello, Javascript")
 	startingPoint() }
