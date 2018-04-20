@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+
 	"github.com/gopherjs/gopherjs/js"
 )
 
@@ -141,4 +142,5 @@ func generateUpperChar(n int) string {
 
 func main() {
 	js.Global.Call("alert", "Hello, Javascript")
-	startingPoint() }
+	startingPoint()
+}
