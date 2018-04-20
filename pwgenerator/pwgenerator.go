@@ -1,6 +1,6 @@
 package main
 
-//Setup github.com
+//Setup 
 
 import (
 	"fmt"
