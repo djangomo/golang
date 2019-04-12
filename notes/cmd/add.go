@@ -32,8 +32,8 @@ var addCmd = &cobra.Command{
 			entry = "missing flag --entry"
 		}
 		fmt.Println("Msg: " + entry)
-
-		fileHandle, err := os.OpenFile("input.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		// should be changed for another location - homefolder used for conky theme
+		fileHandle, err := os.OpenFile("/home/djangomo/input.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			fmt.Println(err)
 		}
