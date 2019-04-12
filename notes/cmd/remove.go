@@ -53,7 +53,7 @@ var removeCmd = &cobra.Command{
 
 func readFile() []string {
 	// reads file and returns a slice with the content
-	notesfile, err := os.Open("/home/djangomo/input.txt")
+	notesfile, err := os.Open("/home/djangomo/notes.txt")
 	if err != nil {
 		log.Fatalf("no such file %s", err)
 	}
@@ -73,7 +73,7 @@ func readFile() []string {
 
 func saveFile(arrayToSave []string) {
 	// saves File to predefined location TODO: change to optional directory ?
-	fileHandle, err := os.OpenFile("/home/djangomo/input.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	fileHandle, err := os.OpenFile("/home/djangomo/notes.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -88,7 +88,7 @@ func saveFile(arrayToSave []string) {
 
 func deletFile() {
 	// Truncates File to 0 bytes - deletes the content for rewrite
-	err := os.Truncate("/home/djangomo/input.txt", 0)
+	err := os.Truncate("/home/djangomo/notes.txt", 0)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -31,17 +31,11 @@ var addCmd = &cobra.Command{
 		if entry == "" {
 			entry = "missing flag --entry"
 		}
-		fmt.Println("Msg: " + entry)
-		// should be changed for another location - homefolder used for conky theme
-		fileHandle, err := os.OpenFile("/home/djangomo/input.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-		if err != nil {
-			fmt.Println(err)
-		}
-		defer fileHandle.Close()
-		if _, err = fileHandle.WriteString(entry + "\n"); err != nil {
-			panic(err)
-		}
-		fmt.Printf("Appended into file\n")
+
+		currentFileEntries := readFile()
+
+		writeToFile(entry, len(currentFileEntries))
+
 	},
 }
 
@@ -56,4 +50,16 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func writeToFile(entry string, i int) {
+	// changing for a dynamic file location?
+	fileHandle, err := os.OpenFile("/home/djangomo/notes.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer fileHandle.Close()
+	if _, err = fileHandle.WriteString(fmt.Sprint(i+1) + " - " + entry + "\n"); err != nil {
+		panic(err)
+	}
 }
