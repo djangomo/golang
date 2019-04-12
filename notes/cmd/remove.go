@@ -34,29 +34,61 @@ var removeCmd = &cobra.Command{
 		if line == "" {
 			line = "missing --line"
 		}
-		fmt.Println("Msg: " + line)
 
-		notesfile, err := os.Open("input.txt")
-		if err != nil {
-			log.Fatalf("no such file %s", err)
-		}
-
-		scanner := bufio.NewScanner(notesfile)
-		scanner.Split(bufio.ScanLines)
-		var txtlines []string
-
-		for scanner.Scan() {
-			txtlines = append(txtlines, scanner.Text())
-		}
-
-		notesfile.Close()
-
+		a := readFile()
 		d, _ := strconv.Atoi(line)
 		d--
 
+		copy(a[d:], a[d+1:])
+		a[len(a)-1] = ""
+		a = a[:len(a)-1]
+
+		deletFile()
+		saveFile(a)
+
 		// TODO: this works so far reading lines from the list
-		fmt.Println(txtlines[d])
+		fmt.Println(a)
 	},
+}
+
+func readFile() []string {
+	notesfile, err := os.Open("/home/djangomo/input.txt")
+	if err != nil {
+		log.Fatalf("no such file %s", err)
+	}
+
+	scanner := bufio.NewScanner(notesfile)
+	scanner.Split(bufio.ScanLines)
+	var txtlines []string
+
+	for scanner.Scan() {
+		txtlines = append(txtlines, scanner.Text())
+	}
+
+	notesfile.Close()
+
+	return txtlines
+}
+
+func saveFile(arrayToSave []string) {
+	fileHandle, err := os.OpenFile("/home/djangomo/input.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer fileHandle.Close()
+	sep := "\n"
+	for _, line := range arrayToSave {
+		if _, err = fileHandle.WriteString(line + sep); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func deletFile() {
+	err := os.Truncate("/home/djangomo/input.txt", 0)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func init() {
