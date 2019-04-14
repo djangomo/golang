@@ -27,14 +27,10 @@ var addCmd = &cobra.Command{
 	Short: "Adds a Task",
 	Long:  `With this you can add several Tasks to your List.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		entry, _ := cmd.Flags().GetString("entry")
-		if entry == "" {
-			entry = "missing flag --entry"
-		}
 
 		currentFileEntries := readFile()
 
-		writeToFile(entry, len(currentFileEntries))
+		writeToFile(args[0], len(currentFileEntries))
 
 	},
 }
@@ -59,7 +55,7 @@ func writeToFile(entry string, i int) {
 		fmt.Println(err)
 	}
 	defer fileHandle.Close()
-	if _, err = fileHandle.WriteString(fmt.Sprint(i+1) + " - " + entry + "\n"); err != nil {
+	if _, err = fileHandle.WriteString(entry + "\n"); err != nil {
 		panic(err)
 	}
 }

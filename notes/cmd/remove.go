@@ -37,7 +37,7 @@ var removeCmd = &cobra.Command{
 
 		// using slice read from File
 		a := readFile()
-		d, _ := strconv.Atoi(line)
+		d, _ := strconv.Atoi(args[0])
 		d--
 
 		// deleting entered line and keeping order
