@@ -28,11 +28,11 @@ import (
 var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "remove a element",
-	Long:  `removes an element from the List based on Linenumber`,
+	Long:  `removes an element from the List based on Linenumber. Example: notes remove 1`,
 	Run: func(cmd *cobra.Command, args []string) {
 		line, _ := cmd.Flags().GetString("lines")
 		if line == "" {
-			line = "missing --line"
+			line = "missing --lines"
 		}
 
 		// using slice read from File
@@ -96,7 +96,8 @@ func deletFile() {
 
 func init() {
 	rootCmd.AddCommand(removeCmd)
-	removeCmd.Flags().StringP("lines", "l", "", "Enter linenumber")
+	// removeCmd.Flags().StringP("lines", "l", "", "Enter linenumber")
+	// rootCmd.PersistentFlags().StringP("entry", "e", "", "entry value")
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// removeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")

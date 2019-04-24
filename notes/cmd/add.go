@@ -25,7 +25,7 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a Task",
-	Long:  `With this you can add several Tasks to your List.`,
+	Long:  `With this you can add several Tasks to your List. Example: notes add 'This is an entry'`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		currentFileEntries := readFile()
